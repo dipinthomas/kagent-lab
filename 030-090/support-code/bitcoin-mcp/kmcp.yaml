@@ -1,0 +1,21 @@
+name: bitcoin-price-mcp
+framework: fastmcp-python
+version: 0.1.0
+description: Bitcoin Price MCP server using CoinGecko API
+secrets:
+    local:
+        enabled: false
+        provider: env
+        file: .env.local
+    production:
+        enabled: false
+        provider: kubernetes
+        secretName: bitcoin-price-mcp-secrets-production
+        namespace: default
+    staging:
+        enabled: false
+        provider: kubernetes
+        secretName: bitcoin-price-mcp-secrets-staging
+        namespace: default
+created_at: 2025-11-06T23:37:06.58421+13:00
+updated_at: 2025-11-06T23:37:06.624317+13:00

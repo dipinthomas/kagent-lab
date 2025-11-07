@@ -1,0 +1,23 @@
+# Bitcoin Price Agent Example Queries
+
+## Basic Queries
+- What's the current Bitcoin price?
+- Show me the price of Ethereum
+- Get the Bitcoin price in EUR
+- What's ETH trading at?
+
+## Currency-Specific
+- Convert Bitcoin to JPY
+- Show Ethereum price in GBP
+- What's BTC worth in EUR?
+- Get LTC price in USD
+
+## Multiple Requests
+- Compare Bitcoin and Ethereum prices
+- Show me BTC and ETH in EUR
+- What's the price difference between BTC and ETH?
+
+## Error Cases
+- Get price for INVALID_COIN
+- Show BTC in INVALID_CURRENCY
+- What's the price of 

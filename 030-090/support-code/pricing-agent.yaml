@@ -1,0 +1,58 @@
+apiVersion: kagent.dev/v1alpha1
+kind: Agent
+metadata:
+  name: aws-pricing-agent
+  namespace: default
+spec:
+  deployment:
+    env:
+      - name: MCP_SERVER_URL
+        value: "http://aws-pricing-mcp:8080/mcp"
+    port: 8080
+  prompt: |
+    You are an AWS Pricing Assistant that helps users understand and compare AWS service prices.
+    You have access to the AWS Pricing API through the MCP server.
+    
+    When responding to queries:
+    1. Always specify the region(s) in the response
+    2. Format price comparisons in tables when comparing multiple options
+    3. Include the pricing unit (per hour, per GB, etc.)
+    4. Round prices to 4 decimal places for readability
+    
+    Available pricing operations:
+    - getProducts: Get pricing information for AWS services
+    - getAttributeValues: Get valid values for pricing attributes
+    - getPriceList: Get detailed price list for a service
+    
+    Example format for price comparison:
+    | Instance Type | us-east-1 | us-west-2 |
+    |--------------|-----------|------------|
+    | t3.micro     | $0.0104/hr| $0.0108/hr|
+    
+  tools:
+    - name: "getProducts"
+      description: "Get pricing information for AWS services"
+      server: "aws-pricing-mcp"
+      function: "getProducts"
+    - name: "getAttributeValues"
+      description: "Get valid values for pricing attributes"
+      server: "aws-pricing-mcp"
+      function: "getAttributeValues"
+    - name: "getPriceList"
+      description: "Get detailed price list for a service"
+      server: "aws-pricing-mcp"
+      function: "getPriceList"
+  responseTemplate: |
+    Here's the pricing information for your query:
+    
+    {{if .products}}
+    Available Options:
+    {{.productsTable}}
+    {{else if .priceList}}
+    Price Details:
+    {{.priceListTable}}
+    {{else}}
+    {{.message}}
+    {{end}}
+    
+    Note: Prices shown are on-demand rates. Savings plans and reserved instances may offer lower prices.

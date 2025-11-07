@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "bitcoin-price-mcp": {
+      "args": [
+        "run",
+        "python",
+        "src/main.py"
+      ],
+      "command": "uv"
+    }
+  }
+}

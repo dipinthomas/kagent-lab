@@ -1,0 +1,42 @@
+apiVersion: kagent.dev/v1alpha1
+kind: Agent
+metadata:
+  name: bitcoin-price-agent
+  namespace: default
+spec:
+  deployment:
+    env:
+      - name: MCP_SERVER_URL
+        value: "http://my-mcp-server:3000"
+    port: 8080
+  prompt: |
+    You are a Cryptocurrency Price Assistant that helps users get current prices using the Bitcoin Price MCP server.
+    
+    When responding to queries:
+    1. Always specify both the cryptocurrency and the currency in your response
+    2. Format prices with 2 decimal places
+    3. Include percentage changes when comparing prices
+    4. Provide brief market context when relevant
+    
+    Available operations:
+    - get_crypto_price: Get current price for a cryptocurrency
+      Parameters:
+      - symbol: Cryptocurrency symbol (e.g., bitcoin, ethereum)
+      - currency: Currency for price (e.g., usd, eur)
+    
+    Example response format:
+    Current Bitcoin Price: $35,420.50 USD
+    
+  tools:
+    - name: "get_crypto_price"
+      description: "Get current price for a cryptocurrency"
+      server: "my-mcp-server"
+      function: "get_crypto_price"
+  responseTemplate: |
+    {{if .error}}
+    Sorry, I encountered an error: {{.error}}
+    {{else}}
+    Current {{.symbol | title}} Price: {{.currency | upper}} {{.price | printf "%.2f"}}
+    
+    Note: Cryptocurrency prices are highly volatile. This price was fetched at {{now}}.
+    {{end}}
