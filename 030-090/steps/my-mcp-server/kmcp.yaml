@@ -1,0 +1,58 @@
+---
+apiVersion: kagent.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: mcp-cloudwatch
+  namespace: kagent
+spec:
+  deployment:
+    image: dipinthomas2003/mcp_cloudwatch:11
+    cmd: uvx
+    args:
+      - awslabs.cloudwatch-mcp-server@latest
+    port: 3000
+    # serviceAccount: cloudwatch-mcp-sa
+    env:
+      AWS_ACCESS_KEY_ID: "YOUR_ACCESS_KEY_ID"
+      AWS_SECRET_ACCESS_KEY: "YOUR_SECRET_ACCESS_KEY"
+      AWS_DEFAULT_REGION: "us-east-1"
+      AWS_REGION: "us-east-1"
+  transportType: stdio
+---
+apiVersion: kagent.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: mcp-website-fetcher
+  namespace: kagent
+spec:
+  deployment:
+    args:
+    - mcp-server-fetch
+    cmd: uvx
+    port: 3000
+  stdioTransport: {}
+  transportType: stdio
+---
+apiVersion: kagent.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: mcp-bitcoin-price
+  namespace: kagent
+spec:
+  deployment:
+    image: dipinthomas2003/my-mcp-server:btc
+    cmd: python3
+    args:
+      - "/app/src/main.py"
+      - "--transport"
+      - "http"
+      - "--host"
+      - "0.0.0.0"
+      - "--port"
+      - "8080"
+    env:
+      PYTHONPATH: "/app"
+    port: 8080
+  httpTransport:
+    targetPort: 8080
+  transportType: http
