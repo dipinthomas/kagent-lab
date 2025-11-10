@@ -22,7 +22,7 @@ agents:
     enabled: false
 
 kmcp:
-  enabled: false
+  enabled: true
 
 kagent-tools:
   enabled: true
