@@ -48,3 +48,4 @@ Prompt query as below:
 ![agent+mcp](image-1.png)
 
 
+![aws calculator price](image-2.png)
