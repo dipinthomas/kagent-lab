@@ -1,6 +1,5 @@
 # Minimal values for a slim Kagent installation
 # - Disables all agents
-# - Keeps KMCP disabled
 # - Keeps kagent-tools disabled
 
 agents:

@@ -1,0 +1,29 @@
+# Jaeger Helm Values Configuration
+# This configuration sets up Jaeger in all-in-one mode for development and testing
+
+# provisionDataStore: Controls whether to provision a data store (Cassandra/Elasticsearch)
+# Setting to false means we'll use the built-in storage option
+provisionDataStore:
+  cassandra: false
+
+# allInOne: Enables the all-in-one deployment mode
+# This runs collector, query, and agent in a single pod - ideal for development
+allInOne:
+  enabled: true
+
+# storage: Configures the storage backend for traces
+# Using memory storage for simplicity - traces will be lost on pod restart
+storage:
+  type: memory
+
+# agent: Jaeger agent component (disabled in all-in-one mode)
+agent:
+  enabled: false
+
+# collector: Jaeger collector component (disabled in all-in-one mode)
+collector:
+  enabled: false
+
+# query: Jaeger query component (disabled in all-in-one mode)
+query:
+  enabled: false

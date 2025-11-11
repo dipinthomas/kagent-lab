@@ -1,0 +1,50 @@
+# Kagent Helm Values Configuration with Tracing Enabled
+
+agents:
+  # Disable most agents to keep the deployment minimal
+  argo-rollouts-agent:
+    enabled: false
+  cilium-debug-agent:
+    enabled: false
+  cilium-manager-agent:
+    enabled: false
+  cilium-policy-agent:
+    enabled: false
+  helm-agent:
+    enabled: false
+  istio-agent:
+    enabled: false
+  # Enable k8s-agent for testing tracing functionality
+  k8s-agent:
+    enabled: true
+  kgateway-agent:
+    enabled: false
+  observability-agent:
+    enabled: false
+  promql-agent:
+    enabled: false
+
+# Enable MCP (Model Context Protocol) support
+kmcp:
+  enabled: true
+
+# Enable kagent-tools for additional functionality
+kagent-tools:
+  enabled: true
+
+# Configure available tools
+tools:
+  grafana-mcp:
+    enabled: false
+  querydoc:
+    enabled: false
+
+# OpenTelemetry configuration for distributed tracing
+otel:
+  tracing:
+    # Enable tracing functionality
+    enabled: true
+    exporter:
+      otlp:
+        # OTLP endpoint pointing to Jaeger collector service
+        endpoint: http://jaeger-collector.jaeger.svc.cluster.local:4317
