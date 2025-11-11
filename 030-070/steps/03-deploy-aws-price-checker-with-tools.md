@@ -45,6 +45,10 @@ Prompt query as below:
 "what is the cost of on-demand g4dn.16xlarge ec2 instance, linux operating system and shared-instance tenancy in us-east-1 and ap-southeast-2 ?"
 
 
+# step 4: Post a complex query
+
+"Compare the on-demand and 1-year reserved instance pricing for m7g.large, m7g.xlarge, and m7g.2xlarge EC2 instances across the ap-southeast-2 (Sydney) and us-east-1 (N. Virginia) regions. Include details like vCPU, memory, and hourly cost for Linux. Then estimate the monthly cost for running a 3-tier web app (2 web servers, 2 app servers, 1 db server) 24×7 in each region — and highlight which region offers the best cost-to-performance ratio. End with 3 cost-optimization recommendations aligned with the AWS Well-Architected Framework."
+
 ![agent+mcp](image-1.png)
 
 
