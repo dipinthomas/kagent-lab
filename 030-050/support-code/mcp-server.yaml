@@ -1,12 +1,12 @@
 apiVersion: kagent.dev/v1alpha1
 kind: MCPServer
 metadata:
-  name: awslabs-aws-cloudwatch-mcp-server-latest
+  name: awslabs-well-architected-security-mcp-server
   namespace: kagent
 spec:
   deployment:
     args:
-    - awslabs.cloudwatch-mcp-server@latest
+    - awslabs.well-architected-security-mcp-server
     cmd: uvx
     env:
       AWS_ACCESS_KEY_ID: 
