@@ -278,3 +278,178 @@ C) The function call execution time
 D) The error handling process
 
 **Answer: A**
+
+## Section 060 - CloudWatch & BYO Agents
+
+### Lab 060-010: CloudWatch AI Agent with MCP Server Integration
+
+**1. What is the primary purpose of the CloudWatch MCP Server in this lab?**
+
+A) To monitor Kubernetes cluster metrics
+B) To enable AI agents to query and analyze AWS CloudWatch logs
+C) To deploy CloudWatch agents to EC2 instances
+D) To create CloudWatch dashboards
+
+**Answer: B**
+
+**2. Which environment variables are required for the CloudWatch MCP Server to authenticate with AWS?**
+
+A) AWS_KEY and AWS_SECRET
+B) AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, and AWS_REGION
+C) AWS_CREDENTIALS and AWS_ZONE
+D) AWS_TOKEN and AWS_ENDPOINT
+
+**Answer: B**
+
+**3. What tool does the CloudWatch agent use to retrieve actual log events from log streams?**
+
+A) `analyze_log_group`
+B) `describe_log_groups`
+C) `get_log_events`
+D) `execute_log_insights_query`
+
+**Answer: C**
+
+**4. When querying for ERROR messages in CloudWatch logs, why might the agent return "no logs present" even when logs exist?**
+
+A) The agent doesn't have the correct tools configured
+B) The time window specified is too narrow or outside the log retention period
+C) The AWS credentials are invalid
+D) The MCP server is not running
+
+**Answer: B**
+
+### Lab 060-020: Build CloudWatch Agent via YAML
+
+**5. What is the correct order of building an Agent YAML file step-by-step?**
+
+A) tools → systemMessage → metadata → modelConfig
+B) apiVersion/kind → metadata → spec.declarative.modelConfig → systemMessage → tools
+C) systemMessage → tools → metadata → apiVersion
+D) modelConfig → tools → description → metadata
+
+**Answer: B**
+
+**6. In the Agent YAML, what does the `spec.declarative.stream` field control?**
+
+A) The number of concurrent requests
+B) Whether responses are streamed in real-time
+C) The log stream to monitor
+D) The network bandwidth allocation
+
+**Answer: B**
+
+**7. Which field in the Agent YAML specifies which MCP server tools the agent can use?**
+
+A) `spec.declarative.tools`
+B) `spec.tools.mcpServer`
+C) `spec.declarative.mcpServers`
+D) `spec.toolServers`
+
+**Answer: A**
+
+### Lab 060-030: Troubleshoot and Fix Broken Agents
+
+**8. What does `ACCEPTED=False` in the agent status typically indicate?**
+
+A) The agent pod is not running
+B) The agent spec has validation errors or invalid references
+C) The agent is out of memory
+D) The agent is processing too many requests
+
+**Answer: B**
+
+**9. What does `READY=False` in the agent status typically indicate?**
+
+A) The agent YAML has syntax errors
+B) The ModelConfig doesn't exist
+C) The agent deployment or pod has issues
+D) The MCP server name is wrong
+
+**Answer: C**
+
+**10. Can an agent be ACCEPTED=True and READY=True without any tools configured?**
+
+A) No, tools are required for acceptance
+B) Yes, but the agent won't have any special capabilities
+C) No, the agent will fail validation
+D) Yes, and it will automatically inherit default tools
+
+**Answer: B**
+
+**11. If an agent has tools configured but the MCP server has empty AWS credentials, what will happen?**
+
+A) The agent will be ACCEPTED=False
+B) The agent will be READY=False
+C) The agent will be ACCEPTED=True and READY=True, but tool calls will fail with authentication errors
+D) The agent pod will crash immediately
+
+**Answer: C**
+
+**12. Which kubectl command is most useful for diagnosing why an agent is not ACCEPTED?**
+
+A) `kubectl get agents`
+B) `kubectl logs agent-pod`
+C) `kubectl describe agent <agent-name>`
+D) `kubectl get pods`
+
+**Answer: C**
+
+**13. What should you do if you see a "session terminated" error after updating MCP server credentials?**
+
+A) Restart the Kubernetes cluster
+B) Delete and recreate the agent
+C) Update the ModelConfig
+D) Increase the agent replicas
+
+**Answer: B**
+
+### Lab 060-040: Deploy a BYO (Bring Your Own) LangGraph Agent
+
+**14. What does BYO stand for in the context of Kagent agents?**
+
+A) Build Your Own
+B) Bring Your Own
+C) Bootstrap Your Operations
+D) Backup Your Objects
+
+**Answer: B**
+
+**15. What is the main difference between a Declarative agent and a BYO agent?**
+
+A) BYO agents are faster
+B) Declarative agents give you full control over logic
+C) BYO agents give you full control over agent logic and behavior
+D) There is no difference
+
+**Answer: C**
+
+**16. What protocol do BYO agents use to communicate with Kagent?**
+
+A) HTTP REST API
+B) gRPC
+C) A2A (Agent-to-Agent) protocol
+D) WebSocket
+
+**Answer: C**
+
+**17. What endpoint can you curl to verify a BYO agent is accessible via A2A protocol?**
+
+A) `/api/agent/status`
+B) `/health`
+C) `/.well-known/agent.json`
+D) `/api/v1/agent`
+
+**Answer: C**
+
+**18. Which field in the BYO agent spec references the Docker image to use?**
+
+A) `spec.byo.image`
+B) `spec.byo.deployment.image`
+C) `spec.deployment.container.image`
+D) `spec.image`
+
+**Answer: B**
+
+
+
