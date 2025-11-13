@@ -1,0 +1,21 @@
+apiVersion: kagent.dev/v1alpha2
+kind: Agent
+metadata:
+  name: langgraph-agent
+  namespace: kagent
+spec:
+  description: This is LangGraph currency agent.
+  type: BYO
+  byo:
+    deployment:
+      image: dipinthomas2003/langgraph-currency:1latest
+      cmd: uv
+      args:
+        - run
+        - samples/langgraph/currency/currency/cli.py
+      env:
+        - name: GOOGLE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: kagent-google
+              key: GOOGLE_API_KEY
