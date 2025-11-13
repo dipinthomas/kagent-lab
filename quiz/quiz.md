@@ -453,3 +453,169 @@ D) `spec.image`
 
 
 
+
+# Lab 030-090: Quiz Questions
+
+This document contains all quiz questions from the lab steps for easy reference and assessment.
+
+---
+
+## Step 01: Install kmcp CLI
+
+**Question**: What is the primary purpose of the `kmcp` CLI tool?
+
+**Options**:
+- A) To manage Kubernetes clusters
+- B) To build and manage Model Context Protocol (MCP) servers
+- C) To deploy Docker containers
+- D) To monitor AI agent performance
+
+**Answer**: B) To build and manage Model Context Protocol (MCP) servers
+
+**Explanation**: The `kmcp` CLI is specifically designed for MCP server development, providing commands for initialization, building, testing, and deployment of MCP servers.
+
+---
+
+## Step 02: Explore kmcp CLI Options
+
+**Question**: Which `kmcp` command would you use to test your MCP server locally before deploying to Kubernetes?
+
+**Options**:
+- A) `kmcp test`
+- B) `kmcp run`
+- C) `kmcp start`
+- D) `kmcp deploy --local`
+
+**Answer**: B) `kmcp run`
+
+**Explanation**: The `kmcp run` command starts your MCP server locally, allowing you to test it with tools like MCP Inspector before deploying to Kubernetes. This is a crucial step in the development workflow to catch issues early.
+
+---
+
+## Step 03: Create MCP Server Scaffold
+
+**Question**: What is the purpose of the `kmcp.yaml` file in an MCP server project?
+
+**Options**:
+- A) It contains the Python source code for tools
+- B) It's the main configuration file for the MCP server project
+- C) It stores test cases for the tools
+- D) It's used only for deployment to Kubernetes
+
+**Answer**: B) It's the main configuration file for the MCP server project
+
+**Explanation**: The `kmcp.yaml` file is the central configuration file that contains project metadata, tool configurations, environment variables, and deployment settings. It's used throughout the development lifecycle, not just for deployment.
+
+---
+
+## Step 05: Add New Tool to MCP Server
+
+**Question**: What is the purpose of the `@mcp.tool()` decorator in an MCP server?
+
+**Options**:
+- A) It makes the function run faster
+- B) It registers the function as an MCP tool that can be called by agents
+- C) It adds error handling to the function
+- D) It converts the function to asynchronous code
+
+**Answer**: B) It registers the function as an MCP tool that can be called by agents
+
+**Explanation**: The `@mcp.tool()` decorator is essential for exposing a Python function as an MCP tool. Without this decorator, the function would just be a regular Python function and wouldn't be discoverable or callable through the MCP protocol.
+
+---
+
+## Step 06: Implement Crypto Price Tool
+
+**Question**: Why is it important to include detailed docstrings in MCP tool functions?
+
+**Options**:
+- A) Docstrings make the code run faster
+- B) AI agents read docstrings to understand what the tool does and how to use it
+- C) Docstrings are only for human developers
+- D) Docstrings are required by Python syntax
+
+**Answer**: B) AI agents read docstrings to understand what the tool does and how to use it
+
+**Explanation**: Docstrings are crucial in MCP tools because AI agents use them to understand the tool's purpose, parameters, and expected outputs. A well-written docstring helps the agent decide when and how to use the tool. This is different from regular code where docstrings are primarily for human developers.
+
+---
+
+## Step 08: Build MCP Server Image
+
+**Question**: Why is the `--platform` flag important when building container images?
+
+**Options**:
+- A) It makes the build faster
+- B) It determines which programming language to use
+- C) It ensures the image is compatible with the target architecture (CPU type)
+- D) It sets the Kubernetes version
+
+**Answer**: C) It ensures the image is compatible with the target architecture (CPU type)
+
+**Explanation**: The `--platform` flag is crucial because container images must match the CPU architecture where they'll run. For example, if you build on an Apple Silicon Mac (ARM64) but deploy to a cloud server (AMD64), you need to specify `--platform linux/amd64` to ensure compatibility. Without this, you might get "exec format error" when trying to run the container.
+
+---
+
+## Bonus Questions
+
+### Question 7: MCP Protocol Understanding
+
+**Question**: What does MCP stand for and what is its primary purpose?
+
+**Options**:
+- A) Model Configuration Protocol - for configuring AI models
+- B) Model Context Protocol - for standardizing how AI agents access tools and data
+- C) Machine Control Protocol - for controlling machine learning pipelines
+- D) Multi-Cloud Platform - for deploying across cloud providers
+
+**Answer**: B) Model Context Protocol - for standardizing how AI agents access tools and data
+
+**Explanation**: MCP (Model Context Protocol) is a standardized protocol that enables AI agents to discover and use tools, access data sources, and interact with external systems in a consistent way.
+
+---
+
+### Question 8: Tool Selection
+
+**Question**: How does an AI agent decide which tool to use when answering a user query?
+
+**Options**:
+- A) It randomly selects from available tools
+- B) It always uses the first tool in the list
+- C) It uses the LLM to analyze the query and match it with tool descriptions
+- D) The user must explicitly specify which tool to use
+
+**Answer**: C) It uses the LLM to analyze the query and match it with tool descriptions
+
+**Explanation**: AI agents use the underlying language model to understand the user's intent, review available tool descriptions (from docstrings), and intelligently select the most appropriate tool(s) to answer the query. This is why clear, descriptive docstrings are so important.
+
+---
+
+### Question 9: Error Handling
+
+**Question**: Why is comprehensive error handling important in MCP tools?
+
+**Options**:
+- A) It makes the code look more professional
+- B) It prevents tool failures from breaking the entire agent
+- C) It's required by the MCP specification
+- D) It makes the tool run faster
+
+**Answer**: B) It prevents tool failures from breaking the entire agent
+
+**Explanation**: Comprehensive error handling ensures that when a tool encounters an issue (API timeout, invalid input, etc.), it returns a meaningful error message instead of crashing. This allows the agent to gracefully handle the error and potentially try alternative approaches or inform the user about the issue.
+
+---
+
+### Question 10: Real-World Applications
+
+**Question**: Which of the following is NOT a good use case for custom MCP tools?
+
+**Options**:
+- A) Fetching real-time data from external APIs
+- B) Querying internal databases and systems
+- C) Replacing the AI model's reasoning capabilities
+- D) Automating DevOps tasks like deployments
+
+**Answer**: C) Replacing the AI model's reasoning capabilities
+
+**Explanation**: MCP tools are designed to extend an agent's capabilities by providing access to external data and actions, not to replace the AI model's core reasoning abilities. Tools should handle specific tasks (API calls, data retrieval, actions) while the AI model handles understanding, reasoning, and decision-making.
