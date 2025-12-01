@@ -69,3 +69,7 @@ Output:
 ```
 
 NOTE: kmcp CRD's are part of kagent package since version 0.7.X. If you are using an older version, you need to install kmcp CRD's separately.
+
+---
+
+**Next Step**: [Step 2: Discover KMCP CRDs (Already Installed)](02-discover-kmcp-crds.md)
