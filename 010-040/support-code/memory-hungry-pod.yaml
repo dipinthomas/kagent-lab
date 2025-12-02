@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memory-hungry-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memory-hungry
+  template:
+    metadata:
+      labels:
+        app: memory-hungry
+    spec:
+      containers:
+      - name: app
+        image: nginx:latest
+        resources:
+          requests:
+            memory: "2Gi"  # Very high memory request
+            cpu: "500m"
+          limits:
+            memory: "4Gi"  # Very high memory limit
+            cpu: "1000m"
+        # This pod will consume excessive memory
+

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: hpa-quota
+  namespace: default
+spec:
+  hard:
+    pods: "10"  # Fixed: Increased from 1 to 10 to allow HPA scaling
+    requests.cpu: "1"
+    requests.memory: "1Gi"
+    limits.cpu: "2"
+    limits.memory: "2Gi"
+
